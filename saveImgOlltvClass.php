@@ -3,7 +3,7 @@
 /**
  * Переименовует и сoхраняет файлы по URL
  * 
- * @author Prot 
+ * @author Vanterbit 
  */
 class saveImgOlltv {
 
@@ -16,7 +16,7 @@ class saveImgOlltv {
      *
      * @return string   -  возвращаем название файла
      * 
-     * @author Prot
+     * @author Vanterbit
      */
     public function getFileNameImg($x) {
 

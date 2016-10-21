@@ -1,6 +1,18 @@
-﻿<?php
-require 'phpQuery.php';
-require 'saveImgOlltvClass.php';
+<?php
+
+//Включаем отображение ошибок
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+//Подключение файлов системы
+
+define('ROOT1', dirname(__FILE__));
+require_once (ROOT1.'config.php');
+require_once (ROOT1.'phpQuery.php');
+require_once (ROOT1.'saveImgOlltvClass.php');
+require_once (ROOT1.'clearDirImg.php');
+
+
 
 $siteUrl = 'http://oll.tv/tv-channels';
 
@@ -9,6 +21,10 @@ $getSite = file_get_contents($siteUrl);
 $doc = phpQuery::newDocument($getSite);
 
 $imgUrl = new saveImgOlltv;
+$fullClear = new clearDirImg;
+
+//Запускаем очистку папки от изображений чтобы туда залить свежие
+$fullClear->clearImg();
 
 
 static $erro = 1;/////////////////////////////////////////
@@ -18,6 +34,7 @@ foreach ($doc->find(".cont-channels-list tr") as $article) {
     
     //Определяем какой тариф выводить - это реализуем позже
     //2-старт, 3-оптимал, 4-премиальный
+    // ВАЖНЫЙ МОМЕНТ! Номер тарифа это номер колонки из страници парсинга
     $tarif = 2;
     
     $findTarif = $article->find("td:eq($tarif)")->text();
