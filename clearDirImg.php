@@ -15,8 +15,10 @@ class clearDirImg {
      *
      * @return boolean  -  возвращаемРезультат
      */
-    public function clearImg($dir = 'images/') {
-//        $dir = 'images/'; // Папка с изображениями
+    public function clearImg($dir) {
+        
+        
+        $dir .= 'images/'; // Папка с изображениями
 
         $files = scandir($dir); // Берём всё содержимое директории
 

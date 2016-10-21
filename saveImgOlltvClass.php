@@ -43,17 +43,19 @@ class saveImgOlltv {
     /**
      * Сoхраняет файлы по URL
      * 
-     * Папку куда нужно сохранять файлы не создается автоматом
-     *
      *
      * @param string $url Первый параметр url файла
      * @param string $path Второй параметр Путь куда сохраняем
      * 
      * @author Prot 
      */
-    public function saveFile($url, $path = "./images/") {
+    public function saveFile($url, $path) {
+        $img = 'images/';
+        $path .= $img;
         $pathNow = $path . $this->getFileNameImg($url);
         file_put_contents($pathNow, file_get_contents($url));
+
+        return $pathNow;
     }
 
 }
