@@ -12,11 +12,15 @@ class clearDirImg {
      * Удаляем все файлы с папки
      * 
      * @param string $dir - путь к папке с файлами
+     * 
+     * @param string $nameCacheFile - имя файла куда пишется код
      *
      * @return boolean  -  возвращаемРезультат
      */
-    public function clearImg($dir) {
+    public function clearImg($dir, $nameCacheFile = '/page.html') {
         
+        $delCacheFile = $dir . $nameCacheFile;
+        unlink($delCacheFile);//удаляем файл с кешированым кодом чтобы создать новый
         
         $dir .= 'images/'; // Папка с изображениями
 
@@ -31,5 +35,6 @@ class clearDirImg {
             }
         }
     }
+    
 
 }

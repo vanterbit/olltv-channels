@@ -48,6 +48,9 @@ class saveImgOlltv {
      * @param string $path Второй параметр Путь куда сохраняем
      * 
      * @author Prot 
+     * 
+     * 
+     * @return string   -  возвращаем название и путь файла
      */
     public function saveFile($url, $path) {
         $img = 'images/';

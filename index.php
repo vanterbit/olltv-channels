@@ -4,6 +4,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+$pathCode = '/olltv-channels/';//ЭТО ТЕСТОВЫЙ ПУТЬ где лежит код!!!!!!
+$nameFileCache = '/page.html';//имя файла куда будет писатся код
+
 //Подключение файлов системы
 
 define('ROOT1', dirname(__FILE__));
@@ -12,7 +15,11 @@ require_once (ROOT1 . '/phpQuery.php');
 require_once (ROOT1 . '/saveImgOlltvClass.php');
 require_once (ROOT1 . '/clearDirImg.php');
 
-
+echo $_SERVER['SERVER_NAME']; 
+echo "<br>";
+echo $_SERVER['SCRIPT_NAME']; 
+echo "<br>";
+echo ROOT1;
 
 $siteUrl = 'http://oll.tv/tv-channels';
 
@@ -67,13 +74,13 @@ foreach ($doc->find(".cont-channels-list tr") as $article) {
         $imgPathLoc = $imgUrl->saveFile($imgAttr, $pathTarif); // в метод передаем Url изображения по которому получаем его
         $nameCannal = $article->find('td:eq(1)')->text();
         
-        $rootPathImg = 'http://'.$_SERVER['SERVER_NAME'].'/olltv-channels/';//ЭТО ТЕСТОВЫЙ ПУТЬ!!!!!!
+        $rootPathImg = 'http://'.$_SERVER['SERVER_NAME'].$pathCode;
         $data = "<div class=\"olltvchennels\">"
                 . " <div class=\"namechennel\"><p> {$nameCannal} </p></div> "
                 . "<img src=\"{$rootPathImg}{$imgPathLoc}\"/>  "
                 . " </div>";
 
-        $fileCache = $pathTarif . '/page.html'; //сюда пишем спарсеные данные
+        $fileCache = $pathTarif . $nameFileCache; //сюда пишем спарсеные данные
 
 
 
