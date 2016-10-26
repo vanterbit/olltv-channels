@@ -4,56 +4,32 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('ROOT1', dirname(__FILE__));
 require_once ('config.php');
-require_once ('getTarifClass.php');
 
-
-$fileTime = 'fileTime.txt';
-$timeUpdateCache = 10; //время обновления кеша в секундах
-
-//2-старт, 3-оптимал, 4-премиальный
-// ВАЖНЫЙ МОМЕНТ! Номер тарифа это номер колонки из страници парсинга
-$tarif = 3;
 $forPathTarif = new getTarifClass();
 $pathTarif = $forPathTarif->getTarif($tarif);
 
+$getStatusCache = new statusCacheClass();
+$statusCache = $getStatusCache->getTimeCache($fileTime, $timeUpdateCache);
 
-$siteUrl = 'http://oll.tv/tv-channels'; //откуда берем материал
-$pathCode = '/olltv-channels/'; //ЭТО ТЕСТОВЫЙ ПУТЬ где лежит код!!!!!!
-$nameFileCache = 'page.php'; //имя файла куда будет писатся код
-$rootPath = 'http://' . $_SERVER['SERVER_NAME'] . $pathCode;// ЭТО нужно поменять на нормальный путь
 
-//если нет файла по котрому смотрим время, то создаем его
-if (!file_exists($fileTime)) {
-    fopen($fileTime, 'w');
-    touch($fileTime, time()-($timeUpdateCache+5));// меняем время создания файла 
-}
-
-//
-$now_date = date("d-m-Y H:i:s");
-$updateFiles = date("d-m-Y H:i:s", filemtime($fileTime));
-$timeResult = floor((strtotime($now_date) - strtotime($updateFiles)));
-
-echo $timeResult;
-//ПРОВЕРЯЕМ ЗАПУСКАТЬ ИЛИ НЕТ
-if ($timeResult > $timeUpdateCache) {
+if ($statusCache) {
     
-    //Подключение файлов системы
     require_once (ROOT1 . '/phpQuery.php');
+    require_once (ROOT1 . '/foldersClass.php');
     require_once (ROOT1 . '/saveImgOlltvClass.php');
     require_once (ROOT1 . '/clearDirImg.php');
 
 
 
-    $getSite = file_get_contents($siteUrl);
+    $getSite = file_get_contents($siteUrl);//ЭТО самая ВРЕМЯЗАТРАТНАЯ операция
     $doc = phpQuery::newDocument($getSite);
-
 
     $imgUrl = new saveImgOlltv();
     $fullClear = new clearDirImg();
-
-
+    
+    $structureDir = new foldersClass();
+    $structureDir->createFolders($dirCache);//проверяем есть ли у нас необходимая структура папок
 
 //Запускаем очистку папки от изображений чтобы туда залить свежие
     $fullClear->clearImg($pathTarif, $nameFileCache);
@@ -90,7 +66,7 @@ if ($timeResult > $timeUpdateCache) {
         touch($fileTime, time());//меняем время файла
     }
 } else {
-    //если файл проверки кэша обновлять не нужно, то запускаем кєшированый файл
+    //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
     echo 'cache';
     $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
     require  $rCache;
