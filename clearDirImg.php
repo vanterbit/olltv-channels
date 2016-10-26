@@ -17,10 +17,13 @@ class clearDirImg {
      *
      * @return boolean  -  возвращаемРезультат
      */
-    public function clearImg($dir, $nameCacheFile = '/page.html') {
+    public function clearImg($dir, $nameCacheFile = 'page.php') {
         
+
         $delCacheFile = $dir . $nameCacheFile;
+        if(file_exists($delCacheFile)){
         unlink($delCacheFile);//удаляем файл с кешированым кодом чтобы создать новый
+        }
         
         $dir .= 'images/'; // Папка с изображениями
 
