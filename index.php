@@ -63,11 +63,11 @@ if ($statusCache) {
             file_put_contents($fileCache, $data, FILE_APPEND);
             echo $data;
         }
-        touch($fileTime, time());//меняем время файла
     }
+    touch($fileTime);//меняем время файла на текущее
 } else {
     //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
-    echo 'cache';
+    echo 'Data cache';
     $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
     require  $rCache;
 }
