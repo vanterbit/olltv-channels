@@ -19,16 +19,15 @@ class statusCacheClass {
     public function getTimeCache($fileTime, $timeUpdateCache) {
         
         
-        $now_date = date("d-m-Y H:i:s");
-        $updateFiles = date("d-m-Y H:i:s", filemtime($fileTime));
-        $timeResult = floor((strtotime($now_date) - strtotime($updateFiles)));
-
-
         //если нет файла по котрому смотрим время, то создаем его
         if (!file_exists($fileTime)) {
             fopen($fileTime, 'w');
             touch($fileTime, time() - ($timeUpdateCache + 5)); // меняем время создания файла 
         }
+        
+        $now_date = date("d-m-Y H:i:s");
+        $updateFiles = date("d-m-Y H:i:s", filemtime($fileTime));
+        $timeResult = floor((strtotime($now_date) - strtotime($updateFiles)));
 
 
         

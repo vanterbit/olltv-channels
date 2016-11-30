@@ -75,7 +75,7 @@ if ($statusCache) {
     touch($fileTime);//меняем время файла на текущее
 } else {
     //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
-    echo 'Data cache';//Удалить, для теста
+//    echo 'Data cache';//Удалить, для теста
     $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
     require  $rCache;
 }

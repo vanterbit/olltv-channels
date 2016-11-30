@@ -7,8 +7,9 @@ define('ROOT1', dirname(__FILE__));
 $tarif = 2;
 
 $siteUrl = 'http://oll.tv/tv-channels'; //откуда берем материал
-$pathCode = '/olltv-channels/'; //ЭТО ТЕСТОВЫЙ ПУТЬ где лежит код!!!!!!
 $nameFileCache = 'page.php'; //имя файла куда будет писатся код
+
+$pathCode = '/olltv-channels/'; //ЭТО КОСТЫЛЬ. ТЕСТОВЫЙ ПУТЬ где лежит код!!!!!!
 $rootPath = 'http://' . $_SERVER['SERVER_NAME'] . $pathCode;// ЭТО нужно поменять на нормальный путь!!!!!!
 
 
