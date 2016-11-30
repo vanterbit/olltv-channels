@@ -49,7 +49,11 @@ if ($statusCache) {
 
             $img = $article->find('td img');
             $imgPathLoc = $imgUrl->saveFile($imgAttr, $pathTarif); // в метод передаем Url изображения по которому получаем его
-            $nameCannal = $article->find('td:eq(1)')->text();
+            $nameCannal = $article->find('td:eq(1)')->text();// Получаем имя канала
+            
+            if(count(preg_split('~[^\p{L}\p{N}\']+~u',$nameCannal)) > 5){// !!!если в названии канала больше 5ти СЛОВ, то не выводим
+            continue ;
+            }
 
 
             $data = "<div class=\"olltvchennels\">"
@@ -61,13 +65,17 @@ if ($statusCache) {
 
             
             file_put_contents($fileCache, $data, FILE_APPEND);
-            echo $data;
+//            echo $data;// сразу выводми
         }
     }
+    
+    $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
+    require  $rCache;
+    
     touch($fileTime);//меняем время файла на текущее
 } else {
     //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
-    echo 'Data cache';
+    echo 'Data cache';//Удалить, для теста
     $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
     require  $rCache;
 }

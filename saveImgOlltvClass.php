@@ -47,7 +47,7 @@ class saveImgOlltv {
      * @param string $url Первый параметр url файла
      * @param string $path Второй параметр Путь куда сохраняем
      * 
-     * @author Prot 
+     * @author Vanterbit 
      * 
      * 
      * @return string   -  возвращаем название и путь файла
