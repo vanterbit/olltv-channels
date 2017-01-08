@@ -3,6 +3,7 @@
 //Включаем отображение ошибок
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+define('ROOT1', dirname(__FILE__));
 
 require_once ('config.php');
 
@@ -32,7 +33,7 @@ if ($statusCache) {
     $structureDir->createFolders($dirCache);//проверяем есть ли у нас необходимая структура папок
 
 //Запускаем очистку папки от изображений чтобы туда залить свежие
-    $fullClear->clearImg($pathTarif, $nameFileCache);
+    $fullClear->clearImg(ROOT1.$pathTarif, $nameFileCache);
 
 
 
@@ -61,7 +62,7 @@ if ($statusCache) {
                     . "<img src=\"{$rootPath}{$imgPathLoc}\"/>  "
                     . " </div>";
 
-            $fileCache = $pathTarif . $nameFileCache; //сюда пишем спарсеные данные
+            $fileCache = ROOT1 . $pathTarif . $nameFileCache; //сюда пишем спарсеные данные
 
             
             file_put_contents($fileCache, $data, FILE_APPEND);

@@ -56,7 +56,7 @@ class saveImgOlltv {
         $img = 'images/';
         $path .= $img;
         $pathNow = $path . $this->getFileNameImg($url);
-        file_put_contents($pathNow, file_get_contents($url));
+        file_put_contents(ROOT1.$pathNow, file_get_contents($url));
 
         return $pathNow;
     }

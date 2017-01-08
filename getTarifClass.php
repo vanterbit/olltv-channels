@@ -21,13 +21,13 @@ public function getTarif($tarif){
     
     switch ($tarif) {
         case 2:
-            $pathTarif = 'cache/start/';
+            $pathTarif = '/cache/start/';
             break;
         case 3:
-            $pathTarif = 'cache/optimal/';
+            $pathTarif = '/cache/optimal/';
             break;
         case 4:
-            $pathTarif = 'cache/premium/';
+            $pathTarif = '/cache/premium/';
             break;
     }
     return $pathTarif;
