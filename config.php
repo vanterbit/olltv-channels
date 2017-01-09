@@ -9,8 +9,12 @@ $tarif = 2;
 $siteUrl = 'http://oll.tv/tv-channels'; //откуда берем материал
 $nameFileCache = 'page.php'; //имя файла куда будет писатся код
 
-$pathCode = '/olltv'; //ЭТО КОСТЫЛЬ. ПУТЬ где лежит код!!!!!!
-$rootPath = 'http://' . $_SERVER['SERVER_NAME'] . $pathCode;// ЭТО нужно поменять на нормальный путь!!!!!!
+//$tmp12345 = explode("\\", ROOT1);// для windows 
+$tmp12345 = explode("/", ROOT1);// для Linux 
+$pathCode = array_pop($tmp12345); //определяем название папки с кодом. Папка должна находится в корне
+
+
+$rootPath = 'http://' . $_SERVER['SERVER_NAME'] .'/'. $pathCode;// ЭТО нужно поменять на нормальный путь!!!!!!
 
 
 $fileTime = ROOT1.'/fileTime.txt';
