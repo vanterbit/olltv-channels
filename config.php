@@ -1,7 +1,5 @@
 <?php
 
-//define('ROOT1', dirname(__FILE__));
-
 //2-старт, 3-оптимал, 4-премиальный
 // ВАЖНЫЙ МОМЕНТ! Номер тарифа это номер колонки из страници парсинга
 $tarif = 2;
@@ -14,10 +12,10 @@ $tmp12345 = explode("/", ROOT1);// для Linux
 $pathCode = array_pop($tmp12345); //определяем название папки с кодом. Папка должна находится в корне
 
 
-$rootPath = 'http://' . $_SERVER['SERVER_NAME'] .'/'. $pathCode;// ЭТО нужно поменять на нормальный путь!!!!!!
+$rootPath = 'http://' . $_SERVER['SERVER_NAME'] .'/'. $pathCode;
 
 
-$fileTime = ROOT1.'/fileTime.txt';
+$fileTime = 'fileTime.txt';
 $timeUpdateCache = 10; //время обновления кеша в секундах
 $dirCache = ROOT1.'/cache'; //название папки куда будес складывать кэш
 

@@ -9,7 +9,7 @@ require_once ('config.php');
 
 $forPathTarif = new getTarifClass();
 $pathTarif = $forPathTarif->getTarif($tarif);
-
+$fileTime = ROOT1.$pathTarif.$fileTime;
 $getStatusCache = new statusCacheClass();
 $statusCache = $getStatusCache->getTimeCache($fileTime, $timeUpdateCache);
 
@@ -77,6 +77,6 @@ if ($statusCache) {
 } else {
     //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
 //    echo 'Data cache';//Удалить, для теста
-    $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
+    $rCache = ROOT1 . $pathTarif . $nameFileCache;
     require  $rCache;
 }
