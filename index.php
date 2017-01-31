@@ -71,12 +71,20 @@ if ($statusCache) {
     }
     
     $rCache = ROOT1.'/' . $pathTarif . $nameFileCache;
-    require  $rCache;
+//    нужна проверка и вывод старых данных в случае не доступности данных!!!
+    if(file_exists($rCache)){
+    include  $rCache;
+    }else{
+        echo "Не возможо получить список каналов!";
+    }
     
     touch($fileTime);//меняем время файла на текущее
 } else {
-    //если файл проверки кэша обновлять не нужно, то запускаем кэшированый файл
-//    echo 'Data cache';//Удалить, для теста
     $rCache = ROOT1 . $pathTarif . $nameFileCache;
-    require  $rCache;
+    //    нужна проверка и вывод старых данных в случае не доступности данных!!!
+    if(file_exists($rCache)){
+    include  $rCache;
+    }else{
+        echo "Не возможо получить список каналов!";
+    }
 }
